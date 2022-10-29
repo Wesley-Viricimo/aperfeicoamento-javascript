@@ -65,7 +65,7 @@ form button :hover {
     background: var(--primary-color-darker);
 }
 
-.paragrafo-resultado, .bad {
+.paragrafo-resultado, .bad, .atencao, .muita-atencao{
     background: rgb(109, 255, 182);
     padding: 10px, 20px;
 }
@@ -75,12 +75,28 @@ form button :hover {
     padding: 10px, 20px;
 }
 
+.atencao {
+    background: rgb(250, 196, 20);
+}
+
+.muita-atencao {
+    background: rgb(255, 120, 9);
+}
+
 .imc{
     padding-top: 350px;
 }
 
 .titulo{
     font-size: 35px;
+    font-weight: bold;
+}
+
+.resultado-titulo {
+    font-weight: bold;
+}
+
+.resultado{
     font-weight: bold;
 }
 
