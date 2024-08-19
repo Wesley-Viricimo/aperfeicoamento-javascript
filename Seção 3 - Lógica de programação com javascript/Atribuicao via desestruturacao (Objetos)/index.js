@@ -12,4 +12,3 @@ const pessoa = {
 const { nome, sobrenome, idade, endereco: { rua, numero} } = pessoa; //Extraindo do objeto a chave informada
 console.log(nome, sobrenome, idade);
 console.log(rua, numero);
-console.log()

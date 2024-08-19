@@ -29,7 +29,6 @@ form.addEventListener('submit', function (evento) {
 
     const msg = `Seu IMC é ${imc} (${nivelImc}).`; // => Adicionando na constante msg o resultado do cálculo do IMC e o nível em que o mesmo se encontra 
 
-
     setTituloResultado(msgTitulo, imc);
     setResultado(msg, true); // => Chamada da função passando como argumento a mensagem  
 });
