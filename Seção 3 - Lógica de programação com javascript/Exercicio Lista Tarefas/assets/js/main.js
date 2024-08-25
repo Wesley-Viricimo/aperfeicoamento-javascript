@@ -47,6 +47,7 @@ document.addEventListener('click', function(evento) { //ADICIONANDO UM ESCUTADOR
     
     if(el.classList.contains('apagar')) { //SE O ELEMENTO CONTIVER A CLASSE 'APAGAR'
         el.parentElement.remove(); //REMOVENDO O ELEMENTO PAI DO ELEMENTO QUE FOI CLICADO, NESTE CASO O LI, QUE SERIA A TAREFA
+        salvarTarefas(); //CHAMADA DA FUNÇÃO DE APAGAR TAREFAS PARA ATUALIZAR O LOCALSTORAGE CASO UMA TAREFA SEJA APAGADA
     }
 });
 
@@ -54,13 +55,24 @@ function salvarTarefas() {
     const liTarefas = tarefas.querySelectorAll('li'); //OBTENDO TODOS OS ELEMENTOS DE TAG LI DENTRO DO ELEMENTO TAREFAS(UL)
     const listaDeTarefas = [];
 
-    for(let tarefa of liTarefas) {
-        let tarefaTexto = tarefa.innerText;
-        tarefaTexto = tarefaTexto.replace('Apagar', '').trim();
-        listaDeTarefas.push(tarefaTexto);
+    for(let tarefa of liTarefas) { //PERCORRER TODAS AS TAREFAS
+        let tarefaTexto = tarefa.innerText; //OBTER O TEXTO DO ELEMENTO LI
+        tarefaTexto = tarefaTexto.replace('Apagar', '').trim(); //SUBSTITUIR O TEXTO APAGAR QUE É DO BOTÃO E REMOVENDO OS ESPAÇOS EM BRANCO
+        listaDeTarefas.push(tarefaTexto); //ADICIONANDO O TEXTO DA LI DENTRO DO ARRAY
     }
 
-    const tarefasJSON = JSON.stringify(listaDeTarefas);
-    localStorage.setItem('tarefas', tarefasJSON);
+    const tarefasJSON = JSON.stringify(listaDeTarefas); //CONVERTE UM ELEMENTO JAVASCRIPT PARA UMA STRING NO FORMATO JSON
+    localStorage.setItem('tarefas', tarefasJSON); //ADICIONANDO A STRING NO FORMATO JSON DE TAREFAS NO LOCALSTORAGE DO NAVEGADOR PARA MANTER A REFERÊNCIA DAS TAREFAS
 }
+
+function adicionaTarefasSalvas() {
+    const tarefas = localStorage.getItem('tarefas'); //OBTENDO TAREFAS SALVAS NO LOCALSTORAGE
+    const listaDeTarefas = JSON.parse(tarefas); //CONVERTENDO A MINHA STRING NO FORMATO JSON PARA ARRAY
+
+    for (let tarefa of listaDeTarefas) { //PERCORRENDO CADA ELEMENTO DO ARRAY
+        criaTarefa(tarefa); //PARA CADA TAREFA ENCONTRADA NO ARRAY DE TAREFAS
+    }
+}
+
+adicionaTarefasSalvas();
 
