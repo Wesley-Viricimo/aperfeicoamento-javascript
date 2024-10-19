@@ -1,5 +1,8 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
 import express from 'express';
-import homeRoutes from './src/routes/homeRoute'
+import homeRoutes from './src/routes/homeRoute';
 
 class App {
   constructor() { //NA INSTÂNCIA DA CLASSE, O EXPRESS, MIDLLEWARES E ROUTES SERÃO CHAMADOS
