@@ -45,7 +45,9 @@ export default class User extends Model {
     });
 
     this.addHook('beforeSave', async user => { //ADICIONANDO HOOK PARA QUE ANTES DE SALVAR, PEGAR A SENHA DO USUÁRIO E ENCRIPTAR USANDO BCRYPT E ATRIBUIR AO CAMPO PASSWORD HASH (OBS: O 8 INFORMADO COMO ARGUMENTO É O SALT, MAS QUANTO MAIOR FOR O VALOR INFORMADO, MAIS PROCESSAMENTO SERÁ CONSUMIDO DURANTE A ENCRIPTAÇÃO)
-      user.password_hash = await bcryptjs.hash(user.password, 8);
+      if(user.password) {
+        user.password_hash = await bcryptjs.hash(user.password, 8);
+      }
     });
 
     return this;
