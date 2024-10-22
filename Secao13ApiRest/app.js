@@ -5,6 +5,7 @@ import './src/database'
 
 import express from 'express';
 import homeRoutes from './src/routes/homeRoute';
+import userRoutes from './src/routes/userRoute';
 
 class App {
   constructor() { //NA INSTÂNCIA DA CLASSE, O EXPRESS, MIDLLEWARES E ROUTES SERÃO CHAMADOS
@@ -20,6 +21,7 @@ class App {
 
   routes() {
     this.app.use('/', homeRoutes);
+    this.app.use('/users', userRoutes);
   }
 }
 

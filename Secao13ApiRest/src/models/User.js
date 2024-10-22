@@ -1,4 +1,5 @@
 import Sequelize, { Model } from "sequelize";
+import bcryptjs from 'bcryptjs';
 
 export default class User extends Model {
   static init(sequelize) { //PASSADO COMO ARGUMENTO PARA O INIT A CONEXÃO COM SEQUELIZE (OBS: O NOME DA CONEXÃO DEVE SER SEQUELIZE)
@@ -16,6 +17,9 @@ export default class User extends Model {
       email: {
         type: Sequelize.STRING,
         defaultValue: '',
+        unique: {
+          msg: 'Email já existe'
+        },
         validate: {
           isEmail: {
             msg: 'Email inválido!'
@@ -27,7 +31,7 @@ export default class User extends Model {
         defaultValue: ''
       },
       password: {
-        type: Sequelize.STRING,
+        type: Sequelize.VIRTUAL, //TIPO VIRTUAL INDICA QUE O CAMPO NÃO SERÁ SALVO NO BANCO DE DADOS
         defaultValue: '',
         validate: {
           len: {
@@ -40,7 +44,9 @@ export default class User extends Model {
       sequelize
     });
 
-    this.addHook('');
+    this.addHook('beforeSave', async user => { //ADICIONANDO HOOK PARA QUE ANTES DE SALVAR, PEGAR A SENHA DO USUÁRIO E ENCRIPTAR USANDO BCRYPT E ATRIBUIR AO CAMPO PASSWORD HASH (OBS: O 8 INFORMADO COMO ARGUMENTO É O SALT, MAS QUANTO MAIOR FOR O VALOR INFORMADO, MAIS PROCESSAMENTO SERÁ CONSUMIDO DURANTE A ENCRIPTAÇÃO)
+      user.password_hash = await bcryptjs.hash(user.password, 8);
+    });
 
     return this;
   }
