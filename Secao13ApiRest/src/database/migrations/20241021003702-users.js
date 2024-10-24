@@ -1,40 +1,46 @@
-'use strict';
+"use strict";
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
-     await queryInterface.createTable('users', {
-      id: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
+  async up(queryInterface, Sequelize) {
+    await queryInterface.createTable(
+      "users",
+      {
+        id: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+          autoIncrement: true,
+          primaryKey: true,
+        },
+        nome: {
+          type: Sequelize.STRING,
+          allowNull: false,
+        },
+        email: {
+          type: Sequelize.STRING,
+          allowNull: false,
+          unique: true,
+        },
+        password_hash: {
+          type: Sequelize.STRING,
+          allowNull: false,
+        },
+        created_at: {
+          type: Sequelize.DATE,
+          allowNull: false,
+        },
+        updated_at: {
+          type: Sequelize.DATE,
+          allowNull: false,
+        },
       },
-      nome: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      email: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true
-      },
-      password_hash: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      created_at: {
-        type: Sequelize.DATE,
-        allowNull: false
-      },
-      updated_at: {
-        type: Sequelize.DATE,
-        allowNull: false
+      {
+        schema: "escola",
       }
-    });
+    );
   },
 
-  async down (queryInterface) {
-    return await queryInterface.dropTable('users');
-  }
+  async down(queryInterface) {
+    return await queryInterface.dropTable("users", { schema: "escola" });
+  },
 };
