@@ -4,7 +4,7 @@ module.exports = {
   dialect: 'postgres',
   host: process.env.DATABASE_POSTGRES_HOST,
   port: process.env.DATABASE_POSTGRES_PORT,
-  schema: 'process.env.DATABASE',
+  schema: process.env.DATABASE,
   username: process.env.DATABASE_POSTGRES_USERNAME,
   password: process.env.DATABASE_POSTGRES_PASSWORD,
   database: process.env.DATABASE_POSTGRES,

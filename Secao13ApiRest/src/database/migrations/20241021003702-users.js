@@ -35,12 +35,12 @@ module.exports = {
         },
       },
       {
-        schema: "escola",
+        schema: 'escola',
       }
     );
   },
 
   async down(queryInterface) {
-    return await queryInterface.dropTable("users", { schema: "escola" });
+    return await queryInterface.dropTable('users', { schema: 'escola' });
   },
 };
