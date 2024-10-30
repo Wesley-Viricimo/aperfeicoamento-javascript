@@ -1,4 +1,5 @@
 import Sequelize, { Model } from "sequelize";
+import appConfig from "../config/appConfig";
 
 export default class Fotos extends Model {
   static init(sequelize) { //PASSADO COMO ARGUMENTO PARA O INIT A CONEXÃO COM SEQUELIZE (OBS: O NOME DA CONEXÃO DEVE SER SEQUELIZE)
@@ -19,6 +20,12 @@ export default class Fotos extends Model {
           notEmpty: {
             msg: 'Campo file name não pode ser vazio!'
           }
+        }
+      },
+      url: {
+        type: Sequelize.VIRTUAL,
+        get() {
+          return `${appConfig.url}/images/${this.getDataValue('filename')}`
         }
       }
     }, {
